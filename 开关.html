@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box{
+        width:200px;
+        height:800px;
+        border: 1px solid #0aa770;
+    }
+    .inner-box{
+        height: auto;
+        width: 100%;
+    }
+    .box-title{
+       background-color: #00b3ee;
+        width: 100%;
+        cursor: pointer;
+    }
+    .title-content{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        -webkit-transition: all .2s linear;
+    }
+</style>
+<body>
+<div class="box" id="box">
+    <div class="inner-box">
+        <div class="box-title">1111111111</div>
+        <div class="title-content" style="height: 100px">
+            <div>111</div>
+            <div>111</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+        </div>
+    </div>
+    <div class="inner-box">
+        <div class="box-title">2222222222</div>
+        <div class="title-content" style="height: 0">
+            <div>222</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+        </div>
+    </div>
+    <div class="inner-box">
+        <div class="box-title">3333333333</div>
+        <div class="title-content" style="height: 0">
+            <div>333</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+        </div>
+    </div>
+    <div class="inner-box">
+        <div class="box-title">4444444444</div>
+        <div class="title-content" style="height: 0">
+            <div>444</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+        </div>
+    </div>
+    <div class="inner-box">
+        <div class="box-title">5555555555</div>
+        <div class="title-content" style="height: 0">
+            <div>555</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+            <div>123123</div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var box=document.getElementById("box");
+    var title=document.getElementsByClassName("box-title");
+    for(var i=0;i<title.length;i++){
+        title[i].onclick=function () {
+
+            for(var i=0;i<title.length;i++){
+
+                title[i].nextElementSibling.style.height="0";
+            }
+         this.nextElementSibling.style.height="100px";
+        }
+    }
+
+</script>
+</html>

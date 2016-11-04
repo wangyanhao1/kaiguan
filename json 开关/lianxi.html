@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body class="body">
+<!--<div class="box">-->
+    <!--<div class="yi">-->
+                        <!--<a href="#" class="div">
+                            <span class="span">一</span>
+                            <i class="ii"></i>
+                            <div class="none"></div>
+                        <div class="zi">
+                            <p>123</p>
+                            <p>123</p>
+                            <p>123</p>
+                            <p>123</p>
+                        </div>
+                        </a>
+                <a href="#" class="div">
+                    <span class="span">二</span>
+                    <i class="ii"></i>
+                    <div class="none"></div>
+                    <div class="zi">
+                        <p>123</p>
+                        <p>123</p>
+                        <p>123</p>
+                        <p>123</p>
+                    </div>
+                </a>
+                            <a href="#" class="div">
+                                <span>三</span>
+                                <i class="ii"></i>
+                                <div class="none"></div>
+                                <div class="zi">
+                                    <p>123</p>
+                                    <p>123</p>
+                                    <p>123</p>
+                                    <p>123</p>
+                                </div>
+                            </a>-->
+    <!--</div>-->
+<!--</div>-->
+</body>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script>
+
+        $.ajax({
+            dataType: "json",
+            url: "json/package.json",
+            type:"GET",
+
+            success: function (data) {
+                console.log(data);
+                var body1 = $("<div class='box'></div>");
+                $(".body").append(body1);
+                var afsef=$("<div class='yi'></div>");
+                $(".box").append(afsef);
+                 for (var i = 0; i < data.length; i++) {
+                      if(data[i].child!=null){
+//                          console.log("awed")
+                              $(".yi").append("<a href='#' class='div'> <span class='span'>"+data[i].name+"</span> <i class='ii'></i> <div class='none'></div> <div class='zi' name='"+data[i].name+"'> </div> </a>");
+                              var ad=data[i].child.length;
+                              for(var j=0;j<ad;j++){
+                                  $("div[class='zi'][name='"+data[i].name+"']").append("<p>"+data[i].child[j]+"</p>")
+                              }
+                      }else{
+                          $(".yi").append("<a href='#' class='div'> <span class='span'>"+data[i].name+"</span></a>");
+                      }
+                     bb();
+            }
+         }
+
+     });
+
+function bb(){
+    var div=document.getElementsByClassName("div");
+    var zi=document.getElementsByClassName("zi");
+    var ii=document.getElementsByClassName("ii");
+    var none=document.getElementsByClassName("none");
+    for(var i=0;i<ii.length;i++) {
+        ii[i].index = i;
+            ii[i].onclick = function () {
+            for(var j=0;j<ii.length;j++){
+                ii[j].style.display="block";
+            }
+            this.style.display="none";
+            for(var j=0;j<none.length;j++){
+                none[j].style.display="none";
+            }
+            none[this.index].style.display="block";
+            for(var j=0;j<zi.length;j++){
+                zi[j].style.display="none";
+            }
+            zi[this.index].style.display="block";
+        }
+
+    }
+
+    for(var i=0;i<none.length;i++){
+        none[i].index=i;
+        none[i].onclick=function () {
+            for(var j=0;j<none.length;j++){
+                none[j].style.display="none";
+            }
+            this.style.display="none";
+            for(var j=0;j<ii.length;j++){
+                ii[j].style.display="block";
+            }
+
+            for(var j=0;j<zi.length;j++){
+                zi[j].style.display="none";
+            }
+
+        }
+    }
+
+//    for(var i=0;i<ii.length;i++){
+//        ii[i].onclick=function () {
+//            for(var i=0;i<div.length;i++){
+//                if(div[i].children[3]){
+//                    div[i].children[3].style.display="none";
+//                }
+//            }
+//            if(this.children[3]){
+//                this.children[3].style.display="block";
+//            }
+//        }
+//    }
+}
+
+
+
+
+
+
+
+
+</script>
+</html>

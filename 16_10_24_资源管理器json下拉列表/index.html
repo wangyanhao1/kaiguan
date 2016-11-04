@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json数组下拉菜单</title>
+    <style>
+        html,body,ul,li,ol,img,a,h1,h2{
+            margin: 0;
+            padding: 0;
+            border: none;
+            list-style: none;
+            text-decoration: none;
+        }
+        html,body{
+            width: 100%;
+            height:100%;
+        }
+        .drop_main{
+            width: 200px;
+            height:auto;
+            background: #E8E8E8;
+        }
+        .drop_child{
+            width: 200px;
+            height:auto;
+            cursor: pointer;
+        }
+        .drop_nav{
+            width: 200px;
+            height:40px;
+            background: #E60012;
+            font-size:16px;
+            color: #fff;
+            text-align: center;
+            line-height:40px;
+        }
+        .drop_nav > span{
+            display: inline-block;
+            font-size:12px;
+            margin-left:10px;
+            -moz-transform:rotate(-90deg);
+            -webkit-transform:rotate(-90deg);
+            /*display: none;*/
+        }
+        #id{
+            -moz-transform:rotate(0deg);
+            -webkit-transform:rotate(0deg);
+        }
+        .sec_menu_main{
+            width: 200px;
+            height:auto;
+            overflow: hidden;
+            display: none;
+            text-align: left;
+        }
+        .sec_menu{
+            width: 200px;
+            height:40px;
+            background: #B47105;
+            font-size:14px;
+            color: #fff;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="drop_main">
+<!--<div class="drop_child">
+        <div class="drop_nav">aewd<span>▽</span></div>
+        <div class="sec_menu_main">
+            <div class="sec_menu">aedf</div>
+            <div class="sec_menu">awd</div>
+            <div class="sec_menu">awd</div>
+        </div>
+    </div>-->
+</div>
+</body>
+<script src="jquery-2.2.0.min.js"></script>
+<script>
+    $.ajax({
+        dataType: "json",
+        url: "package.json",
+        type: "get",
+        success: function (data) {
+            console.log(data);
+            for(var i=0;i<data.length;i++){
+                if(data[i].child!=null){
+                    $(".drop_main").append("<div class='drop_child'> <div class='drop_nav'>"+data[i].name+"<span>▽</span></div> <div class='sec_menu_main' name='"+data[i].name+"'> </div> </div>")
+                    for(var j=0;j<data[i].child.length;j++){
+                        $("div[class='sec_menu_main'][name='"+data[i].name+"']").append("<div class='sec_menu'>"+data[i].child[j]+"</div>")
+                    }
+                }else{
+                    $(".drop_main").append("<div class='drop_child'> <div class='drop_nav'>"+data[i].name+"<span> </span></div> </div>")
+                }
+                ff();
+            }
+        }
+    });
+    function ff() {
+        var drop_child=document.getElementsByClassName("drop_child");
+        for(var i=0;i<drop_child.length;i++){
+            drop_child[i].onclick=function () {
+                for(var i=0;i<drop_child.length;i++){
+                    if(drop_child[i].children[1]){
+                        drop_child[i].children[1].style.display="none";
+                        drop_child[i].children[0].children[0].id="";
+                    }
+                }
+                if(this.children[1]){
+                    this.children[1].style.display="block";
+                    this.children[0].children[0].id="id";
+                }
+            }
+        }
+    }
+</script>
+</html>

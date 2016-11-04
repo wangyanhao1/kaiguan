@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>开关控件</title>
+	<script src="js/function.js"></script>
+	<script src="js/animate.js"></script>
+</head>
+<style>
+	ul{
+		list-style:none;
+	}
+	.one{
+		background:red;
+	}
+</style>
+
+<body>
+	<script>
+	window.onload=function(){
+		 function nextnode(obj){
+           var next=obj.nextSibling;
+           while(next.nodeType==3){
+           	next=next.nextSibling;
+           }
+           return next;
+        };
+        var box=document.getElementsByClassName('one');
+        var num=0;
+        var flag=true;
+             for(var i=0;i<box.length;i++){
+
+        	nextnode(box[i]).style.display='none'
+            box[i].index=i;
+            box[i].onclick=function(){
+            	if(num==this.index){
+                    if(flag){
+                    	nextnode(box[this.index]).style.display='block';
+                        flag=false;
+                    }else{
+                    	nextnode(box[this.index]).style.display='none';
+                    	flag=true;
+                    }
+            	}else{
+                        nextnode(box[num]).style.display='none';
+            		    flag=false;
+            			nextnode(box[this.index]).style.display='block'; 
+            	}
+               num=this.index;
+            }	
+        }
+
+	}
+      
+	</script>
+	<ul>
+		<li class='one'>第一</li>
+		<li>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</li>
+	</ul>
+
+	<ul>
+		<li class='one'>第二</li>
+		<li>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</li>
+	</ul>
+	<ul>
+		<li class='one'>第三</li>
+		<li>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
